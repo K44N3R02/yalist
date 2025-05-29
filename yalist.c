@@ -18,19 +18,30 @@ List* new_int(int i) {
     return new;
 }
 
-int push(List* lst, List* elem) {
+int push(List** lst, List* elem) {
     List* new ;
-    if (!IS_LST(lst)) {
+    if (!IS_LST(*lst)) {
         return 0;
     }
-
-    new = realloc(AS_LST(lst), (LEN(lst) + 1) * sizeof(List));
-    if (!new) {
-        fprintf(stderr, "Cannot allocate memory for new element.\n");
-        return 0;
+    if(!AS_LST(*lst))
+    {
+        new= malloc(sizeof(List));
+        if (!new) {
+            fprintf(stderr, "Cannot allocate memory for new element.\n");
+            return 0;
+        }
     }
-    AS_LST(lst)[LEN(lst)]=*elem;
-    LEN(lst)++;
+    else
+    {
+        new = realloc(AS_LST(*lst), (LEN(*lst) + 1) * sizeof(List));
+        if (!new) {
+            fprintf(stderr, "Cannot allocate memory for new element.\n");
+            return 0;
+        }
+    }
+    AS_LST(*lst)=new;
+    AS_LST(*lst)[LEN(*lst)]=*elem;
+    LEN(*lst)++;
     return 1;
 }
 
@@ -47,6 +58,7 @@ List* pop(List* lst) {
     copy = malloc(sizeof(List));
     *copy = AS_LST(lst)[LEN(lst) - 1];
     AS_LST(lst) = realloc(AS_LST(lst), (LEN(lst) - 1) * sizeof(List));
+    LEN(lst)--;
     
     return copy;
 }
@@ -68,15 +80,15 @@ void print(List* lst)
         printf(")");
     }
 
-
-    printf(")");
 }
 
 void free_lst(List* lst)
 {
+    if(!lst) return ;
     if(IS_INT(lst))
     {
         free(lst);
+        return;
     }
     else 
     {
