@@ -13,7 +13,7 @@ int main(void) {
     push(lst, i1);
     push(lst, inner);
     print(lst);
-    free_lst(lst);
+/*    free_lst(lst);*/
 
     return 0;
 }
