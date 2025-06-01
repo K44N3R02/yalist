@@ -1,7 +1,7 @@
 CC = clang
 CFLAGS = -Wall -pedantic-errors -O0 -std=c89 -pedantic -g
 TARGET = yalist
-SOURCES = main.c yalist.c
+SOURCES = main.c yalist.c parser.c
 
 all: $(TARGET)
 
