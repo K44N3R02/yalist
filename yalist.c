@@ -6,7 +6,7 @@ List* new_lst(void) {
     List* new = malloc(sizeof(List));
     new->type = TYPE_LIST;
     new->len = 0;
-    new->as.l = NULL;
+    AS_LST(new) = NULL;
     return new;
 }
 
@@ -14,7 +14,7 @@ List* new_int(int i) {
     List* new = malloc(sizeof(List));
     new->type = TYPE_INT;
     new->len = 0;
-    new->as.i = i;
+    AS_INT(new) = i;
     return new;
 }
 
@@ -63,7 +63,7 @@ List* pop(List* lst) {
     return copy;
 }
 
-void print(List* lst)
+static void print_rec(List* lst)
 {
     if(IS_INT(lst))
     {
@@ -75,11 +75,16 @@ void print(List* lst)
         printf("(");
         for(i=0;i<lst->len;i++)
         {
-            print(&AS_LST(lst)[i]);
+            print_rec(&AS_LST(lst)[i]);
         }
         printf(")");
     }
+}
 
+void print(List* lst)
+{
+    print_rec(lst);
+    printf("\n");
 }
 
 void free_lst(List* lst)
