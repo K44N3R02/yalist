@@ -24,7 +24,7 @@ typedef struct list {
 
 List* new_lst(void);
 List* new_int(int i);
-int push(List* lst, List* elem);
+int push(List** lst, List* elem);
 List* pop(List* lst);
 void print(List* lst);
 void free_lst(List* lst);
