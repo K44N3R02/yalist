@@ -63,6 +63,8 @@ static Token make_token(TokenType type) {
     return token;
 }
 
+static Token error_token(const char *str) {}
+
 static Token number(void) {
     /* advance while current char is digit */
     /* error if unexpected character */
