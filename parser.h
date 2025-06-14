@@ -19,7 +19,6 @@ typedef struct {
     char* end;
 } Scanner;
 
-Scanner scanner;
 /*
 (1 (  2 3)   )
 lparen

@@ -1,0 +1,18 @@
+<program> ::= <list>
+        ;
+<type> ::= <list>
+        | <int>
+        | <string>
+        ;
+<list> ::= LPAREN <type>* RPAREN
+        ;
+<string> ::= [a-zA-Z]+
+        ;
+<posint> ::= [1-9][0-9]*
+        ;
+<int> ::= "-"? <posint>
+        ;
+LPAREN ::= '('
+        ;
+RPAREN ::= ')'
+        ;

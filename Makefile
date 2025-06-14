@@ -14,5 +14,9 @@ clean:
 run: all
 	./$(TARGET)
 
-.PHONY: all clean run # Declare these as phony targets
+test: all
+	./$(TARGET) > out.txt
+	diff out.txt exp.txt
+
+.PHONY: all clean run test # Declare these as phony targets
 
